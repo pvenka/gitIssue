@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+<body>
+<h1 class="text-center"> London Bus Line Status </h1>
+  <div class="col-lg-12">
+      <style>
+        .form-signin {
+          max-width: 550px;
+          padding: 15px;
+          margin: 0 auto;
+        }    
+      </style>
+      <div class="container text-center">
+          <form class="form-signin" id="login_form" method="post" action="/demapp/lineStatus/">
+            {% csrf_token %}
+            <br>
+            <input type="text" name="busno" class="form-control" placeholder="bus no, e.g: 411" value="" required autofocus>
+            <br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Get Status</button>
+          </form>
+      </div>
+      <div class="table-responsive">
+          <table class="table table-bordered table-hover table-striped tablesorter">
+              <thead>
+              <tr>
+                <th class="header"> Line No <i class="icon-sort"></i></th>
+                <th class="header"> Status <i class="icon-sort"></i></th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for key in data %}
+              <tr>
+                  <td>{{ key.line_no }}</td>
+                  <td>{{ key.status }}</td>
+              </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+      </div>
+    </div>
+</body>
+</html>
