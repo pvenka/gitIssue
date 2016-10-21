@@ -49,6 +49,21 @@
           {% endfor %}
           </tbody>
           </table>
+		<p> The following table shows the error code when an invalid github or repo name is used </p>
+		<table>
+		<thead>
+                <tr>
+	        <th> Error Code </th>
+		</tr>
+                </thead>
+		<tbody>
+		{% for key in err %}
+		<tr>
+                <td>{{ key.err}}</td>
+		 </tr>
+		{% endfor %}
+		</tbody>
+		</table>
       </div>
     </div>
 </body>
