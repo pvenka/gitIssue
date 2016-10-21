@@ -2,9 +2,7 @@ from django.shortcuts import render, HttpResponse
 import requests
 import json
 import urllib
-from dateutil import parser
 import datetime
-from collections import OrderedDict
 # Create your views here.
 
 def index(request):
