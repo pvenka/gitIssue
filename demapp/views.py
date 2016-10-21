@@ -8,30 +8,12 @@ from collections import OrderedDict
 # Create your views here.
 
 def index(request):
-	txts = '''Welcome to London transit API example.
-		  You can see bus status.
-                  Go to ./lineStatus.'''
+	txts = '''Welcome to  git issue API example.
+		  You can see issue status.
+                  Go to ./gitIssues.'''
 	return HttpResponse(txts)
 
 
-def lineStatus(request):
-	parsedData = []
-	dic = {}
-	statd = {}
-        if request.method == 'POST':
-		busno = str(request.POST.get('busno'))
-		url = 'https://api.tfl.gov.uk/Line/' + busno + '/Status?'
-        	qstr = urllib.urlencode(OrderedDict([('detail','False'),('app_id','bd8c84b0'),('app_key','1dfcc5142ef4aa70f85a26af9bdd4a2f')]))
-		url = url + qstr
-		req = requests.get(url)
-        	content = req.text
-        	jsonl =  json.loads(content)
-        	dic = jsonl[0]
-		statd['line_no'] = dic['id']
-	
-		statd['status'] =  dic['lineStatuses'][0]['statusSeverityDescription']
-        	parsedData.append(statd)
-	return render(request, 'demapp/lineStatus.html', {'data': parsedData})
 
 def gitIssues(request):
 	times = []
