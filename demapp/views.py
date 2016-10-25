@@ -68,6 +68,7 @@ def gitIssues(request):
                 	alldict["less_than_a_day"] = ltday
                 	alldict["less_than_a_week"] = ltweek
                 	alldict["more_than_a_week"] = mtweek
+			alldict["all_total"] = ltday+ltweek+mtweek
                 	alldat.append(alldict)
        	      #		return render(request,'demapp/gitIssues.html', {'data':alldat})
 		else:

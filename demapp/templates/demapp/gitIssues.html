@@ -37,9 +37,10 @@
       </div>
       <div class="table-responsive" id ="mydiv1">
           <table class="table table-bordered table-hover table-striped tablesorter" id ="mytab1">
-                <caption> No of open issues in: </cation>
+                <caption> No of open issues: </cation>
 		<thead>
               <tr>
+		<th class="header"> all_total.   <i class="icon-sort"></i></th>
                 <th class="header"> last 24 hours.   <i class="icon-sort"></i></th>
                 <th class="header">  last week.   <i class="icon-sort"></i></th>
                 <th class="header">  more than a week.  <i class="icon-sort"></i></th>
@@ -48,6 +49,7 @@
           <tbody>
           {% for key in data %}
               <tr>
+		  <td>{{ key.all_total }}</td>
                   <td>{{ key.less_than_a_day }}</td>
                   <td>{{ key.less_than_a_week }}</td>
 		  <td>{{ key.more_than_a_week }}</td>
