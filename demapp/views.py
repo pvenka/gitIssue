@@ -20,19 +20,39 @@ def gitIssues(request):
 	errdict = {}
 	errs = []
         global issue
+	issues = []
 	if request.method == 'POST':
 		git_rep = str(request.POST.get('gits'))
 		git_repo = str(request.POST.get('repo'))
 		url = 'https://api.github.com/repos/' + git_rep +'/'+git_repo+'/issues?'
-		qstr = urllib.urlencode({'status':'open'})
+		qstr = urllib.urlencode({'status':'open','per_page':100})
 		url = url+qstr
-		
 		req = requests.get(url)
-		if req.status_code==200:
-			r = req.text
-               		issue = json.loads(r)
+		if req.status_code ==200:
+	
+			r = requests.head(url=url)
+			rd = requests.get(url)
+			issue = json.loads(rd.text)
+			for iss in issue:
+        			issues.append(iss)
+			while True :
+        			if 'next' not in r.links:
+                			break
+
+        			urin = r.links['next']['url']
+        			r = requests.head(url=urin)
+        			rd = requests.get(urin)
+        			issue = json.loads(rd.text)
+        			for iss in issue:
+                			issues.append(iss)
+
+
+		#req = requests.get(url)
+		#if req.status_code==200:
+	#		r = req.text
+               	#	issue = json.loads(r)
                 	today = datetime.datetime.today()
-                	for item in issue:
+                	for item in issues:
                         	diff = today-datetime.datetime.strptime(item["created_at"],'%Y-%m-%dT%H:%M:%SZ')
                         	times.append((diff.days))
                 	ltday = 0
